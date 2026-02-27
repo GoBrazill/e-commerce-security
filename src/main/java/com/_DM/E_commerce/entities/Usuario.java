@@ -1,5 +1,6 @@
 package com._DM.E_commerce.entities;
 
+import com._DM.E_commerce.dtos.UsuarioDTO;
 import com._DM.E_commerce.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,6 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
-    @Column(unique = true)
     private String email;
     private String telefone;
     private String senha;
@@ -30,4 +30,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
+
+    public Usuario(UsuarioDTO dto) {
+    }
 }
