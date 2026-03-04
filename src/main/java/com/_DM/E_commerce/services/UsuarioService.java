@@ -15,7 +15,7 @@ public class UsuarioService {
     }
 
     public UsuarioDTO criarUsuario(UsuarioDTO dto) {
-        Usuario usuario = new Usuario(dto);
+        Usuario usuario = new Usuario(dto.getNome(), dto.getEmail(), dto.getTelefone(), dto.getSenha(), dto.getRole());
         usuarioRepository.save(usuario);
         UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha(), usuario.getRole());
         return usuarioDTO;

@@ -31,6 +31,11 @@ public class Usuario {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public Usuario(UsuarioDTO dto) {
+    public Usuario(String nome, String email, String telefone, String senha, Role role) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.role = role;
     }
 }

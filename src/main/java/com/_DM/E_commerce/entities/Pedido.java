@@ -2,6 +2,7 @@ package com._DM.E_commerce.entities;
 
 import com._DM.E_commerce.enums.StatusPedido;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,9 @@ public class Pedido {
 
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Pagamento pagamento;
+
+    public Pedido(LocalDate momento, StatusPedido status) {
+        this.momento = momento;
+        this.status = status;
+    }
 }

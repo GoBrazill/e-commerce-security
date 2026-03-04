@@ -14,12 +14,11 @@ public class PedidoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public Pedido criarPedido(PedidoDTO dto) {
-//            Pedido pedido = new pedido(dto);
-//            userRepository.save(pedido);
-//            PedidoDTO pedidodto = new PedidoDTO(pedido.getStatus(), pedido.getMomento(), pedido.gete);
-//            return pedidodto;
-
+    public PedidoDTO criarPedido(PedidoDTO dto) {
+            Pedido pedido = new Pedido(dto.getMomento(), dto.getStatus());
+            pedidoRepository.save(pedido);
+            PedidoDTO pedidodto = new PedidoDTO(pedido.getMomento(), pedido.getStatus());
+            return pedidodto;
     }
 
 }

@@ -23,6 +23,11 @@ public class Pagamento {
     private UUID id;
     private LocalDate momento;
 
+    public Pagamento(UUID id, LocalDate momento) {
+        this.id = id;
+        this.momento = momento;
+    }
+
 //   mapsId indica que o mesmo id dessa deese pedido vai ser o mesmo da primary key do pedido
     @OneToOne
     @MapsId
