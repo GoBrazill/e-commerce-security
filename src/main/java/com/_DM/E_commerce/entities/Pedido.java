@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -23,6 +25,9 @@ public class Pedido {
     private UUID id;
     private LocalDate momento;
     private StatusPedido status;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<PedidoProduto> produto = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
