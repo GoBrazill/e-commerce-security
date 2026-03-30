@@ -2,10 +2,12 @@ package com._DM.E_commerce.services;
 
 import com._DM.E_commerce.entities.Pedido;
 import com._DM.E_commerce.dtos.PedidoDTO;
+import com._DM.E_commerce.enums.StatusPedido;
 import com._DM.E_commerce.repositories.PedidoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,8 +21,11 @@ public class PedidoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public PedidoDTO criarPedido(PedidoDTO dto) {
-            Pedido pedido = new Pedido(dto.getMomento(), dto.getStatus());
+    public PedidoDTO criarPedido() {
+            Pedido pedido = new Pedido();
+            pedido.setStatus(StatusPedido.AGUARDANDO_PAGAMENTO);
+            pedido.setMomento(LocalDate.now());
+
             pedidoRepository.save(pedido);
 
             return new PedidoDTO(pedido.getMomento(), pedido.getStatus());
