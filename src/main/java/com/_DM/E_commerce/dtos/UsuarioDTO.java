@@ -26,6 +26,5 @@ public class UsuarioDTO {
     @NotBlank
     @Size(min = 6, max = 20)
     private String senha;
-    @NotBlank
     private Role role;
 }
