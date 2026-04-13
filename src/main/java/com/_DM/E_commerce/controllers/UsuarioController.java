@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@RequestMapping("usuario")
+@RequestMapping()
 @RestController
 public class UsuarioController {
 
@@ -18,28 +18,33 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("criar")
+    @PostMapping("usuario/criar")
     public ResponseEntity<?> criarUsuario(@Valid @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.criarUsuario(dto));
     }
 
-    @GetMapping("mostrar/todos")
+    @GetMapping("usuario/mostrar/todos")
     public ResponseEntity<?> mostrarUsuarios() {
         return ResponseEntity.ok(usuarioService.mostrarUsuarios());
     }
 
-    @GetMapping("mostrar/{id}")
+    @GetMapping("usuario/mostrar/{id}")
     public ResponseEntity<?> mostrarUsuarioPorId(@PathVariable UUID id) {
         return ResponseEntity.ok(usuarioService.mostrarUsuarioPorId(id));
     }
 
-    @PutMapping("atualizar/{id}")
+    @PutMapping("usuario/atualizar/{id}")
     public ResponseEntity<?> atualizarUsuario(@PathVariable UUID id, @Valid @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioService.atualizarUsuario(id, dto));
     }
 
-    @DeleteMapping("deletar/{id}")
+    @DeleteMapping("usuario/deletar/{id}")
     public ResponseEntity<?> deletarUsuario(@PathVariable UUID id) {
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
+    }
+
+    @GetMapping("admin")
+    public String testeAdmin() {
+        return "The dad is awesome, there is no way";
     }
 }

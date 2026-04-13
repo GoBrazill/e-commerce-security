@@ -31,11 +31,10 @@ public class Usuario {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
-    public Usuario(String nome, String email, String telefone, String senha, Role role) {
+    public Usuario(String nome, String email, String telefone, String senha) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-        this.role = role;
     }
 }

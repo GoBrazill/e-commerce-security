@@ -2,6 +2,7 @@ package com._DM.E_commerce.services;
 
 import com._DM.E_commerce.dtos.UsuarioDTO;
 import com._DM.E_commerce.entities.Usuario;
+import com._DM.E_commerce.enums.Role;
 import com._DM.E_commerce.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,10 @@ public class UsuarioService {
     }
 
     public UsuarioDTO criarUsuario(UsuarioDTO dto) {
-        Usuario usuario = new Usuario(dto.getNome(), dto.getEmail(), dto.getTelefone(), dto.getSenha(), dto.getRole());
+        Usuario usuario = new Usuario(dto.getNome(), dto.getEmail(), dto.getTelefone(), dto.getSenha());
+        usuario.setRole(Role.USER);
         usuarioRepository.save(usuario);
-        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha(), usuario.getRole());
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha());
         return usuarioDTO;
     }
 
@@ -39,7 +41,7 @@ public class UsuarioService {
     public UsuarioDTO mostrarUsuarioPorId(UUID id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com id: " + id));
 
-        return new UsuarioDTO(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha(), usuario.getRole());
+        return new UsuarioDTO(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha());
     }
 
     public String atualizarUsuario(UUID id, UsuarioDTO dto) {
