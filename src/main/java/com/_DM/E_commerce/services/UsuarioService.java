@@ -5,6 +5,7 @@ import com._DM.E_commerce.entities.Usuario;
 import com._DM.E_commerce.enums.Role;
 import com._DM.E_commerce.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,13 +17,16 @@ import java.util.UUID;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UsuarioDTO criarUsuario(UsuarioDTO dto) {
-        Usuario usuario = new Usuario(dto.getNome(), dto.getEmail(), dto.getTelefone(), dto.getSenha());
+        Usuario usuario = new Usuario(dto.getNome(), dto.getEmail(), dto.getTelefone(), passwordEncoder.encode(dto.getSenha()));
         usuario.setRole(Role.USER);
         usuarioRepository.save(usuario);
         UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getEmail(), usuario.getTelefone(), usuario.getSenha());
